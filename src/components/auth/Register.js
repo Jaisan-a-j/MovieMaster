@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import '../../styles/Register.css'; // Ensure correct path to Register.css
+import '../../styles/Register.css';
+import axios from 'axios';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -12,13 +13,22 @@ const Register = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.log('Register submitted', formData);
-    // Add logic here to handle form submission (e.g., API call, state update, etc.)
+
+    try {
+      const response = await axios.post(
+        'http://localhost:3001/api/auth/createUser',
+        formData,
+      );
+      console.log('User created:', response.data);
+    } catch (error) {
+      console.error('Error creating user:', error);
+    }
   };
 
-  const { username, email, password } = formData; // Destructure formData for easier access
+  const { username, email, password } = formData;
 
   return (
     <div>
