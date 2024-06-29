@@ -1,13 +1,36 @@
 import React, { useState } from 'react';
 import '../../styles/Login.css';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.log('Login submitted', { email, password });
+
+    try {
+      const response = await fetch('http://localhost:3001/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Login failed');
+      }
+
+      const { token } = await response.json();
+      localStorage.setItem('token', token);
+      navigate('/adminpage');
+    } catch (error) {
+      console.error('Login error:', error.message);
+      alert('Login failed. Please check your credentials.');
+    }
   };
 
   return (

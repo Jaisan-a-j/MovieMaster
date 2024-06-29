@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 import Loginpage from './pages/Loginpage';
 import Registerpage from './pages/Registerpage';
+import Adminpage from './pages/Adminpage';
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Routes>
           <Route path='/login' element={<Loginpage />} />
           <Route path='/register' element={<Registerpage />} />
+          <Route path='/adminpage' element={<Adminpage />} />
           <Route path='/' element={<Navigate to='/login' />} />
         </Routes>
       </Router>
