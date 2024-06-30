@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../../styles/Register.css';
+import '../../assets/styles/Register.css';
 import axios from 'axios';
 
 const Register = () => {
@@ -22,7 +22,7 @@ const Register = () => {
         'http://localhost:3001/api/auth/createUser',
         formData,
       );
-      console.log('User created:', response.data);
+      console.log('User generated:', response.data);
     } catch (error) {
       console.error('Error creating user:', error);
     }

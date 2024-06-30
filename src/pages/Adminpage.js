@@ -1,9 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react';
+import Header from '../components/common/Header';
+import Movielist from '../components/admin/Movielist';
+import Purchaselist from '../components/admin/Purchaselist';
 
 const Adminpage = () => {
-  return (
-    <div>Adminpage</div>
-  )
-}
+  const [selectedPage, setSelectedPage] = useState('home');
 
-export default Adminpage
+  const handleNavigation = (page) => {
+    setSelectedPage(page);
+  };
+
+  return (
+    <div>
+      <Header onNavigate={handleNavigation} />
+      {selectedPage === 'home' && <Movielist />}
+      {selectedPage === 'purchase' && <Purchaselist />}
+    </div>
+  );
+};
+
+export default Adminpage;
